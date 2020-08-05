@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::namespace('Api')->group(function(){    
+    Route::get('/students', 'StudentController@index');
+    Route::get('/students/{student}', 'StudentController@show');
+    Route::post('/students', 'StudentController@store');
+    Route::put('/students/{student}', 'StudentController@update');
+    Route::delete('/students/{student}', 'StudentController@destroy');
+});
