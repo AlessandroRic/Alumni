@@ -28,13 +28,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            return Student::create($request->all());
-        } catch(\Throwable $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ],500);
-        }
+        return Student::create($request->all());
     }
 
     /**
@@ -43,15 +37,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
-        $student = Student::find($id);
-
-        if($student) {
-            return response()->json($student, 302);
-        }
-        
-        return response()->json(['message' => 'Não encontrado!'],404);
+        return $student;
     }
 
     /**
@@ -61,23 +49,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Student $student)
     {
-        $student = Student::find($id);
-
-        if(!$student){
-            return response()->json(['message' => 'Não encontrado!'],404);
-        }
-
-        try {
-            $student->update($request->all());
-
-            return [];
-        } catch(\Throwable $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ],500);
-        }
+        $student->update($request->all());
+        return [];
     }
 
     /**
@@ -86,22 +61,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
-        $student = Student::find($id);
+        $student->delete();
 
-        if(!$student){
-            return response()->json(['message' => 'Não encontrado!'],404);
-        }
-
-        try {
-            $student->delete();
-
-            return [];
-        } catch(\Throwable $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ],500);
-        }
+        return [];
     }
 }
