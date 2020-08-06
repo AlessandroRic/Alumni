@@ -26,7 +26,7 @@ class StudentRequest extends FormRequest
         return [
             'name' => 'required',
             'birth' => 'required',
-            'enrollment' => 'required',
+            'enrollment' => 'required|integer',
             'course_id' => 'required'
         ];
     }
