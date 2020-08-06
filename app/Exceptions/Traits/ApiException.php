@@ -3,6 +3,7 @@
 namespace App\Exceptions\Traits;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 trait ApiException {
@@ -14,6 +15,9 @@ trait ApiException {
         }
         if($e instanceof HttpException) {
             return $this->httpException($e);
+        }
+        if($e instanceof ValidationException) {
+            return $this->validationException($e);
         }
         return $this->genericException();
     }
@@ -27,14 +31,7 @@ trait ApiException {
         );
     }
 
-    protected function httpException($e) 
-    {
-        return $this->getResponse(
-            "Erro de Verbo HTTP",
-            "03",
-            $e->getStatusCode()
-        );
-    }
+
 
     protected function genericException() 
     {
@@ -56,5 +53,19 @@ trait ApiException {
                 ]
             ]
         ], $status);
+    }
+
+    protected function httpException($e) 
+    {
+        return $this->getResponse(
+            "Erro de Verbo HTTP",
+            "03",
+            $e->getStatusCode()
+        );
+    }
+
+    protected function validationException($e) 
+    {
+        return response()->json($e->errors(), $e->status);
     }
 }
