@@ -1,0 +1,112 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Alumni Api",
+        "description": "Alumni ApiRest OpenSource",
+        "contact": {
+            "email": "argferreira1@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/students": {
+            "get": {
+                "tags": [
+                    "students"
+                ],
+                "summary": "Get list of students",
+                "description": "Returns list of students",
+                "operationId": "getstudentsList",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/students/{id}": {
+            "get": {
+                "tags": [
+                    "students"
+                ],
+                "summary": "Get students information",
+                "description": "Returns students data",
+                "operationId": "getstudentsById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "students"
+                ],
+                "summary": "Put student information",
+                "description": "Returns student data",
+                "operationId": "putstudentById",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "students"
+                ],
+                "summary": "Delete student information",
+                "description": "Returns student data",
+                "operationId": "deletestudentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    }
+}
