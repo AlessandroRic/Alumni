@@ -34,8 +34,8 @@ class Solution {
     }
     foreach($testSum as $secondKey=>$resultSum) {
       if($resultSum == $target) {
-
-      }$response[$secondKey] 
+        $response[$secondKey];
+      }
     }
   }
 
